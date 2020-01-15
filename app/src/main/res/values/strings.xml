@@ -1,3 +1,9 @@
 <resources>
+    <declare-styleable name="SearchBoxCircularView">
+        <attr name="sbc_asset_search" format="integer" />
+        <attr name="sbc_asset_clear" format="integer" />
+        <attr name="sbc_asset_clear_disable" format="integer" />
+    </declare-styleable>
     <string name="app_name">Github User Search</string>
+    <string name="label_search_github_user">Search Github User</string>
 </resources>
