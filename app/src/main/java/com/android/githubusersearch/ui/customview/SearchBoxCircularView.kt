@@ -88,7 +88,7 @@ class SearchBoxCircularView : LinearLayout {
                             queryInput.postValue("")
                             assetClearDisable?.let { drawable -> ivClear.setImageDrawable(drawable) }
                         }
-                        it.length >= 3 -> {
+                        it.isNotEmpty() -> {
                             queryInput.postValue(it.toString())
                             assetClear?.let { drawable -> ivClear.setImageDrawable(drawable) }
                         }
@@ -119,19 +119,6 @@ class SearchBoxCircularView : LinearLayout {
             }
         } finally {
             typedArray.recycle()
-        }
-    }
-
-    fun setFocusableSearch(visible: Boolean) {
-        when {
-            visible -> {
-                et_query_search?.isFocusable = true
-                et_query_search?.isFocusableInTouchMode = true
-            }
-            else -> {
-                et_query_search?.isFocusable = false
-                et_query_search?.isFocusableInTouchMode = false
-            }
         }
     }
 

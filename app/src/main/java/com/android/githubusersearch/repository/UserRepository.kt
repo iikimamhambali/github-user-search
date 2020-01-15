@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.android.githubusersearch.base.BaseRepo
 import com.android.githubusersearch.model.SearchData
 import com.android.githubusersearch.model.SearchRequest
+import com.android.githubusersearch.model.SearchResult
 import com.android.githubusersearch.network.SearchServices
 import com.android.githubusersearch.utils.ApiResponse
 import com.android.githubusersearch.utils.AppExecutors
@@ -14,10 +15,10 @@ class UserRepository(
     private val service: SearchServices
 ) {
 
-    fun getAllUser(request: SearchRequest): LiveData<Resource<List<SearchData>>> {
-        return object : BaseRepo<List<SearchData>>(appExecutors) {
-            override fun loadFromNetwork(): LiveData<ApiResponse<List<SearchData>>> {
-                return service.getUser(request.page, request.limit)
+    fun getAllUser(request: SearchRequest): LiveData<Resource<SearchResult>> {
+        return object : BaseRepo<SearchResult>(appExecutors) {
+            override fun loadFromNetwork(): LiveData<ApiResponse<SearchResult>> {
+                return service.getUser(request.query, request.page, request.limit)
             }
         }.asLiveData()
     }

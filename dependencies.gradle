@@ -1,5 +1,5 @@
 ext {
-    kotlinVersion = '1.3.21'
+    kotlinVersion = '1.3.50'
     supportLibraryVersion = '27.1.1'
     eventBusVersion = '3.0.0'
     okHttp3Version = '3.8.1'
@@ -10,7 +10,7 @@ ext {
     glideVersion = '4.9.0'
     glideOkHttpVersion = '4.9.0'
     koinVersion = '2.0.0-GA'
-    gsonVersion = '2.8.1'
+    gsonVersion = '2.8.5'
     espressoCoreVersion = '2.2.2'
     constrainLayoutVersion = '1.1.2'
     deepLinkVersion = '3.1.0'
@@ -27,7 +27,7 @@ ext {
     expandableLayoutVersion = '2.9.2'
     tapTargetViewVersion = '1.11.0'
     tapTargetViewPromptVersion = '2.7.0'
-    archVersion = '1.1.1'
+    archVersion = '2.0.0'
     sendBird = '3.0.72'
     circleImageView = '2.2.0'
     stickyScrollViewItems = '1.1.0'
@@ -65,14 +65,14 @@ ext {
     ]
 
     archLifecycle = [
-            archViewModel     : 'androidx.lifecycle:lifecycle-viewmodel:2.0.0',
+            archViewModel     : "androidx.lifecycle:lifecycle-viewmodel:$archVersion",
             archLiveData      : "android.arch.lifecycle:livedata:$archVersion",
-            archExtensions    : 'androidx.lifecycle:lifecycle-extensions:2.0.0',
+            archExtensions    : "androidx.lifecycle:lifecycle-extensions:$archVersion",
             archReactiveStream: "android.arch.lifecycle:reactivestreams:$archVersion",
-            archCompiler      : 'androidx.lifecycle:lifecycle-compiler:2.0.0',
-            archRoom          : 'androidx.room:room-runtime:2.0.0',
-            archRoomCompiler  : 'androidx.room:room-compiler:2.0.0',
-            archRoomRxJava2   : 'androidx.room:room-rxjava2:2.0.0'
+            archCompiler      : "androidx.lifecycle:lifecycle-compiler:$archVersion",
+            archRoom          : "androidx.room:room-runtime:$archVersion",
+            archRoomCompiler  : "androidx.room:room-compiler:$archVersion",
+            archRoomRxJava2   : "androidx.room:room-rxjava2:$archVersion"
     ]
 
     libraries = [

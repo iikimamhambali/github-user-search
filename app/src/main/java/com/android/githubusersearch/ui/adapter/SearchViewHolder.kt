@@ -16,7 +16,7 @@ class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                 R.mipmap.ic_launcher,
                 R.mipmap.ic_launcher
             )
-            tvSearchContent.text = data.name
+            tvSearchContent.text = data.login
         }
     }
 }
