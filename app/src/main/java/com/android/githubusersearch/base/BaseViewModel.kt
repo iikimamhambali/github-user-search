@@ -3,7 +3,7 @@ package com.android.githubusersearch.base
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 
-class BaseViewModel : ViewModel() {
+open class BaseViewModel : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
 

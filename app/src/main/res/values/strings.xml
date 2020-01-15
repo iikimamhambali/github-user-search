@@ -6,4 +6,6 @@
     </declare-styleable>
     <string name="app_name">Github User Search</string>
     <string name="label_search_github_user">Search Github User</string>
+
+    <string name="server_url">https://api.github.com</string>
 </resources>

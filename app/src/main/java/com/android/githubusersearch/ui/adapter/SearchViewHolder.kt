@@ -11,8 +11,12 @@ class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun bind(data: SearchData) {
         with(itemView) {
-            ivAvatarUser.loadFromUrlWithPlaceholder("", R.mipmap.ic_launcher, R.mipmap.ic_launcher)
-            tvSearchContent.text = data.title
+            ivAvatarUser.loadFromUrlWithPlaceholder(
+                data.avatarUrl,
+                R.mipmap.ic_launcher,
+                R.mipmap.ic_launcher
+            )
+            tvSearchContent.text = data.name
         }
     }
 }

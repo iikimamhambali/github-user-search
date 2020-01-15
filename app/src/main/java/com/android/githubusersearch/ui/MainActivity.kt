@@ -12,9 +12,10 @@ import org.jetbrains.anko.toast
 
 class MainActivity : BaseActivity() {
 
-    private val data = mutableListOf<SearchData>()
+    private var data = mutableListOf<SearchData>()
     private var query = ""
     private var currentPage: Int = 0
+    private var page: Int = 0
 
     private val adapterSearch by lazy { SearchAdapter(data) }
 
@@ -52,15 +53,18 @@ class MainActivity : BaseActivity() {
         svUser?.setAssetClearDisable(R.drawable.ic_clear_grey)
     }
 
-    private fun addData() {
-
+    private fun addData(list: List<SearchData>) {
+        data.addAll(list)
+        adapterSearch.notifyDataSetChanged()
     }
 
     private fun clearData() {
-
+        data.clear()
+        adapterSearch.notifyDataSetChanged()
     }
 
-    private fun replaceData() {
-
+    private fun replaceData(data: MutableList<SearchData>) {
+        this.data = data
+        adapterSearch.notifyDataSetChanged()
     }
 }
