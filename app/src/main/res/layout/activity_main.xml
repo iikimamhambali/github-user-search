@@ -6,13 +6,79 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/sectionSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.android.githubusersearch.ui.customview.SearchBoxCircularView
+            android:id="@+id/svUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvStateContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="10dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/sectionSearch"
+        app:layout_constraintStart_toStartOf="@+id/sectionSearch"
+        app:layout_constraintTop_toBottomOf="@+id/sectionSearch"
+        tools:text="Feel free for search user..." />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="14dp"
+        app:layout_constraintEnd_toEndOf="@+id/sectionSearch"
+        app:layout_constraintStart_toStartOf="@+id/sectionSearch"
+        app:layout_constraintTop_toBottomOf="@+id/sectionSearch">
+
+        <com.android.githubusersearch.base.BaseRecyclerview
+            android:id="@+id/rvUser"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:itemCount="5"
+            tools:listitem="@layout/layout_search_item" />
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.android.githubusersearch.ui.customview.SearchProgressView
+        android:id="@+id/sectionProgress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/sectionSearch"
+        app:layout_constraintStart_toStartOf="@+id/sectionSearch"
+        app:layout_constraintTop_toBottomOf="@+id/sectionSearch" />
+
+    <ProgressBar
+        android:id="@+id/pbHorizontal"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:indeterminateOnly="true"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:targetApi="LOLLIPOP"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

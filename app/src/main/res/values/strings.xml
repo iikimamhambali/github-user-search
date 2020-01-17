@@ -1,3 +1,15 @@
 <resources>
+    <declare-styleable name="SearchBoxCircularView">
+        <attr name="sbc_asset_search" format="integer" />
+        <attr name="sbc_asset_clear" format="integer" />
+        <attr name="sbc_asset_clear_disable" format="integer" />
+    </declare-styleable>
     <string name="app_name">Github User Search</string>
+    <string name="label_search_github_user">Search Github User</string>
+
+    <string name="server_url">https://api.github.com</string>
+    <string name="label_empty_search">User not found</string>
+    <string name="label_initial_search">Feel free for search user…</string>
+    <string name="label_server_busy">Server busy, please try again later</string>
+    <string name="label_lost_connection">Please check your internet connection</string>
 </resources>
