@@ -46,4 +46,27 @@
 
     </androidx.core.widget.NestedScrollView>
 
+    <com.android.githubusersearch.ui.customview.SearchProgressView
+        android:id="@+id/sectionProgress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/svUser"
+        app:layout_constraintStart_toStartOf="@+id/svUser"
+        app:layout_constraintTop_toBottomOf="@+id/svUser" />
+
+    <ProgressBar
+        android:id="@+id/pbHorizontal"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:indeterminateOnly="true"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:targetApi="LOLLIPOP"
+        tools:visibility="visible" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

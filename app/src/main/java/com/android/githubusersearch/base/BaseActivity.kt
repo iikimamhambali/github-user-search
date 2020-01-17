@@ -21,4 +21,16 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
     override fun loadingData(isFromSwipe: Boolean) {}
 
     override fun observeData() {}
+
+    override fun startLoading() {}
+
+    override fun stopLoading() {}
+
+    override fun onInternetError(){}
+
+    override fun onDataNotFound(){}
+
+    override fun onServerBusy(){}
+
+    override fun onError(throwable: Throwable?){}
 }

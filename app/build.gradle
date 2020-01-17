@@ -98,6 +98,7 @@ dependencies {
     implementation libraries.debugLeakCanary
     implementation libraries.shimmerLayout
     implementation libraries.glide
+    implementation libraries.shimmer
 
     testImplementation testLibraries.junit
 

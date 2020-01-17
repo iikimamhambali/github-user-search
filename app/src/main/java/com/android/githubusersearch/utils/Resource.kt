@@ -17,7 +17,7 @@ data class Resource<out T>(
         }
 
         fun <T> empty(): Resource<T> {
-            return Resource(Status.EMPTY, null, null)
+            return Resource(Status.DATA_NOT_FOUND, null, null)
         }
 
         fun <T> error(throwable: Throwable? = null): Resource<T> {

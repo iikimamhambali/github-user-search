@@ -11,9 +11,7 @@ import com.android.githubusersearch.base.BaseRecyclerview
 import com.android.githubusersearch.model.SearchData
 import com.android.githubusersearch.model.SearchRequest
 import com.android.githubusersearch.ui.adapter.SearchAdapter
-import com.android.githubusersearch.utils.Status
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.toast
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity() {
@@ -23,6 +21,7 @@ class MainActivity : BaseActivity() {
     private var currentPage: Int = 0
     private var page: Int = 0
     private var isLoad = false
+    private var hitCount = 0
 
     private val adapterSearch by lazy { SearchAdapter(resultList) }
     private val viewModel by viewModel<MainViewModel>()
@@ -31,7 +30,7 @@ class MainActivity : BaseActivity() {
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
-        setupInitialSearch()
+        setupTextState(getString(R.string.label_initial_search))
         setupRecylerview()
         setupScrollListener()
         getSearchData()
@@ -47,7 +46,7 @@ class MainActivity : BaseActivity() {
 
     private fun setupScrollListener() {
         nested.setOnScrollChangeListener { v: NestedScrollView, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
-            if (v.getChildAt(v.childCount - 1) != null && currentPage < page && !isLoad) {
+            if (v.getChildAt(v.childCount - 1) != null && currentPage <= page && !isLoad) {
                 if ((scrollY >= (v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight)) &&
                     scrollY > oldScrollY
                 ) {
@@ -57,29 +56,20 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private fun setupEmptyState() {
+    private fun setupTextState(messange: String? = "") {
         tvStateContent.visibility = View.VISIBLE
-        tvStateContent.text = getString(R.string.label_empty_search)
-    }
-
-    private fun setupInitialSearch() {
-        tvStateContent.visibility = View.VISIBLE
-        tvStateContent.text = getString(R.string.label_initial_search)
+        tvStateContent.text = messange
     }
 
     private fun goneTextState() {
         tvStateContent.visibility = View.GONE
     }
 
-    private fun showProgressbar(visible: Boolean) {
-        when (visible) {
-            true -> goneTextState()
-            else -> goneTextState()
+    private fun loadingData(page: Int, query: String = "") {
+        when (hitCount) {
+            10 -> setupTextState(getString(R.string.label_server_busy))
+            else -> viewModel.getAllUser(SearchRequest(query = query, page = page, limit = 30))
         }
-    }
-
-    private fun loadingData(page: Int, query: String) {
-        viewModel.getAllUser(SearchRequest(query = query, page = page, limit = 10))
     }
 
     private fun getSearchData() {
@@ -87,7 +77,10 @@ class MainActivity : BaseActivity() {
         svUser?.setHintLabel(getString(R.string.label_search_github_user))
         svUser?.getQueryInput()?.observe(this, Observer {
             when {
-                it.isEmpty() -> setupInitialSearch()
+                it.isEmpty() -> {
+                    setupTextState(getString(R.string.label_initial_search))
+                    rvUser.visibility = View.GONE
+                }
                 it.isNotEmpty() -> {
                     query = it
                     currentPage = 0
@@ -102,10 +95,8 @@ class MainActivity : BaseActivity() {
     }
 
     private fun addData(list: List<SearchData>) {
-        val positionStart = resultList.size + 1
-        val itemCount = list.size
         resultList.addAll(list)
-        adapterSearch.notifyItemRangeInserted(positionStart, itemCount)
+        adapterSearch.notifyDataSetChanged()
     }
 
     private fun clearData() {
@@ -116,30 +107,47 @@ class MainActivity : BaseActivity() {
     override fun observeData() {
         super.observeData()
         viewModel.userList.observe(this, Observer {
-            when (it.status) {
-                Status.LOADING -> showProgressbar(isLoad)
-                Status.SUCCESS -> {
-                    isLoad = false
-                    it.data?.let { result ->
+            parseObserveData(it,
+                resultSuccess = { result ->
+                    result?.let {
                         if (result.item.isNullOrEmpty()) {
-                            setupEmptyState()
+                            setupTextState(getString(R.string.label_empty_search))
                             rvUser.visibility = View.GONE
-                            return@Observer
+                            return@parseObserveData
                         }
                         addData(result.item)
                         currentPage++
+                        hitCount++
                         page = result.totalCount
                     }
-                }
-                Status.EMPTY -> {
-                    isLoad = false
-                    setupEmptyState()
+                }, resultDataNotFound = {
+                    setupTextState(getString(R.string.label_empty_search))
                     rvUser.visibility = View.GONE
-                }
-                Status.ERROR -> {
-                }
-            }
+                })
         })
     }
 
+    override fun startLoading() {
+        isLoad = true
+        when (currentPage) {
+            0 -> {
+                sectionProgress?.visibility = View.VISIBLE
+                sectionProgress?.startShimmer()
+            }
+            else -> pbHorizontal?.visibility = View.VISIBLE
+        }
+        goneTextState()
+    }
+
+    override fun stopLoading() {
+        isLoad = false
+        when (currentPage) {
+            0 -> {
+                sectionProgress?.stopShimmer()
+                sectionProgress?.visibility = View.GONE
+            }
+            else -> pbHorizontal?.visibility = View.GONE
+        }
+        sectionProgress?.visibility = View.GONE
+    }
 }

@@ -10,4 +10,5 @@
     <string name="server_url">https://api.github.com</string>
     <string name="label_empty_search">User not found</string>
     <string name="label_initial_search">Feel free for search user…</string>
+    <string name="label_server_busy">Server busy, please try again later</string>
 </resources>
