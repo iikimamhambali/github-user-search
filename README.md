@@ -27,7 +27,11 @@ To check dependencies using
 ## Built With
 
 * Android Support libraries
-* [Retrofit 2](http://square.github.io/retrofit/) - For Networking
+* MVVM Design Pattern
+* Live data and Repository Pattern
+* Shimmer for progressbar item
+* [Koin](https://github.com/InsertKoinIO/koin) - Dependecy injection
+* [Retrofit 2](http://square.github.io/retrofit/) - Networking
 * [RxJava](https://github.com/ReactiveX/RxJava) and [RxAndroid](https://github.com/ReactiveX/RxAndroid) - Better coding
 * [Glide](https://github.com/bumptech/glide) - Image Processing
 
