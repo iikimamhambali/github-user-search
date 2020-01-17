@@ -73,10 +73,9 @@ dependencies {
 
     api archLifecycle.archRoom
     api archLifecycle.archRoomRxJava2
-    kapt archLifecycle.archRoomCompiler
-
     api archLifecycle.archExtensions
     api archLifecycle.archViewModel
+    kapt archLifecycle.archRoomCompiler
     kapt archLifecycle.archCompiler
 
     implementation libraries.okHttp3
