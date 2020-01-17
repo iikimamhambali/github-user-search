@@ -11,7 +11,9 @@ import com.android.githubusersearch.base.BaseRecyclerview
 import com.android.githubusersearch.model.SearchData
 import com.android.githubusersearch.model.SearchRequest
 import com.android.githubusersearch.ui.adapter.SearchAdapter
+import com.android.githubusersearch.utils.NetworkUtils
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity() {
@@ -23,6 +25,7 @@ class MainActivity : BaseActivity() {
     private var isLoad = false
     private var hitCount = 0
 
+    private val networkUtils by inject<NetworkUtils>()
     private val adapterSearch by lazy { SearchAdapter(resultList) }
     private val viewModel by viewModel<MainViewModel>()
 
@@ -66,10 +69,16 @@ class MainActivity : BaseActivity() {
     }
 
     private fun loadingData(page: Int, query: String = "") {
-        when (hitCount) {
-            10 -> setupTextState(getString(R.string.label_server_busy))
-            else -> viewModel.getAllUser(SearchRequest(query = query, page = page, limit = 30))
+        when {
+            networkUtils.isConnected -> {
+                when (hitCount) {
+                    10 -> setupTextState(getString(R.string.label_server_busy))
+                    else -> viewModel.getAllUser(SearchRequest(query = query, page = page, limit = 30))
+                }
+            }
+            else -> setupTextState(getString(R.string.label_lost_connection))
         }
+
     }
 
     private fun getSearchData() {
