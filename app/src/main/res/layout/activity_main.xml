@@ -6,14 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
-    <com.android.githubusersearch.ui.customview.SearchBoxCircularView
-        android:id="@+id/svUser"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/sectionSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="14dp"
+        android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.android.githubusersearch.ui.customview.SearchBoxCircularView
+            android:id="@+id/svUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvStateContent"
@@ -22,9 +34,9 @@
         android:layout_marginTop="10dp"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/svUser"
-        app:layout_constraintStart_toStartOf="@+id/svUser"
-        app:layout_constraintTop_toBottomOf="@+id/svUser"
+        app:layout_constraintEnd_toEndOf="@+id/sectionSearch"
+        app:layout_constraintStart_toStartOf="@+id/sectionSearch"
+        app:layout_constraintTop_toBottomOf="@+id/sectionSearch"
         tools:text="Feel free for search user..." />
 
     <androidx.core.widget.NestedScrollView
@@ -32,9 +44,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="14dp"
-        app:layout_constraintEnd_toEndOf="@+id/svUser"
-        app:layout_constraintStart_toStartOf="@+id/svUser"
-        app:layout_constraintTop_toBottomOf="@+id/svUser">
+        app:layout_constraintEnd_toEndOf="@+id/sectionSearch"
+        app:layout_constraintStart_toStartOf="@+id/sectionSearch"
+        app:layout_constraintTop_toBottomOf="@+id/sectionSearch">
 
         <com.android.githubusersearch.base.BaseRecyclerview
             android:id="@+id/rvUser"
@@ -51,9 +63,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/svUser"
-        app:layout_constraintStart_toStartOf="@+id/svUser"
-        app:layout_constraintTop_toBottomOf="@+id/svUser" />
+        app:layout_constraintEnd_toEndOf="@+id/sectionSearch"
+        app:layout_constraintStart_toStartOf="@+id/sectionSearch"
+        app:layout_constraintTop_toBottomOf="@+id/sectionSearch" />
 
     <ProgressBar
         android:id="@+id/pbHorizontal"
