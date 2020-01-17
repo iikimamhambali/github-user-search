@@ -92,7 +92,7 @@ class MainActivity : BaseActivity() {
                 }
                 it.isNotEmpty() -> {
                     query = it
-                    currentPage = 0
+                    currentPage = 1
                     clearData()
                     loadingData(page = currentPage, query = query)
                 }
@@ -139,7 +139,7 @@ class MainActivity : BaseActivity() {
     override fun startLoading() {
         isLoad = true
         when (currentPage) {
-            0 -> {
+            1 -> {
                 sectionProgress?.visibility = View.VISIBLE
                 sectionProgress?.startShimmer()
             }
@@ -151,7 +151,7 @@ class MainActivity : BaseActivity() {
     override fun stopLoading() {
         isLoad = false
         when (currentPage) {
-            0 -> {
+            1 -> {
                 sectionProgress?.stopShimmer()
                 sectionProgress?.visibility = View.GONE
             }
